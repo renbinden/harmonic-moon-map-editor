@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>io.github.lucariatias</groupId>
-    <artifactId>hm-map-edit</artifactId>
+    <artifactId>harmonic-moon-map-editor</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <build>
