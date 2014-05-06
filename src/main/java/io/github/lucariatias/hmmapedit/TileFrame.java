@@ -132,6 +132,16 @@ public class TileFrame extends JFrame {
         });
         scrollingMenu.add(disableScrolling);
         menuBar.add(scrollingMenu);
+        JMenu jumpMenu = new JMenu("Jump");
+        JMenuItem coordJump = new JMenuItem("Co-ords");
+        coordJump.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent event) {
+                TileFrame.this.mapFrame.getCamera().setLocation(new Location(Integer.parseInt(JOptionPane.showInputDialog("X:")), Integer.parseInt(JOptionPane.showInputDialog("Y:"))));
+            }
+        });
+        jumpMenu.add(coordJump);
+        menuBar.add(jumpMenu);
         setJMenuBar(menuBar);
     }
 
