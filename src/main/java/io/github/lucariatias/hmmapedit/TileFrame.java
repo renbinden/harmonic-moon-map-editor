@@ -138,6 +138,7 @@ public class TileFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent event) {
                 TileFrame.this.mapFrame.getCamera().setLocation(new Location(Integer.parseInt(JOptionPane.showInputDialog("X:")), Integer.parseInt(JOptionPane.showInputDialog("Y:"))));
+                TileFrame.this.mapFrame.repaint();
             }
         });
         jumpMenu.add(coordJump);
