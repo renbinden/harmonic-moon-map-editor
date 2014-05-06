@@ -18,20 +18,16 @@ public class MapPanel extends JPanel {
     private BufferedImage backTopTileMap;
     private BufferedImage objectMap;
     private BufferedImage frontTileMap;
+    private BufferedImage frontTopTileMap;
     private TileSheet tileSheet;
     private Map<Layer, Set<Tile>> tiles = new EnumMap<>(Layer.class);
     private Set<WorldObject> objects = new HashSet<>();
 
-    public MapPanel(MapFrame mapFrame, Camera camera, BufferedImage backTileMap, BufferedImage backTopTileMap, BufferedImage objectMap, BufferedImage frontTileMap, TileSheet tileSheet) {
+    public MapPanel(MapFrame mapFrame, Camera camera) {
         setLayout(null);
         setBackground(Color.BLACK);
         this.mapFrame = mapFrame;
         this.camera = camera;
-        this.backTileMap = backTileMap;
-        this.backTopTileMap = backTopTileMap;
-        this.objectMap = objectMap;
-        this.frontTileMap = frontTileMap;
-        this.tileSheet = tileSheet;
         mapFrame.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
             public void mouseDragged(MouseEvent event) {
@@ -92,6 +88,7 @@ public class MapPanel extends JPanel {
             case BACK: backTileMap.setRGB(mapTileX, mapTileY, col); break;
             case BACK_TOP: backTopTileMap.setRGB(mapTileX, mapTileY, col); break;
             case FRONT: frontTileMap.setRGB(mapTileX, mapTileY, col); break;
+            case FRONT_TOP: frontTopTileMap.setRGB(mapTileX, mapTileY, col); break;
         }
         objectMap.setRGB(mapTileX, mapTileY, mapFrame.getTileFrame().getSelectedObject().toColour().getRed() << 16 | mapFrame.getTileFrame().getSelectedObject().toColour().getGreen() << 8 | mapFrame.getTileFrame().getSelectedObject().toColour().getBlue());
         repaint();
@@ -140,6 +137,17 @@ public class MapPanel extends JPanel {
                 }
             }
         }
+        for (int x = 0; x < frontTopTileMap.getWidth(); x++) {
+            for (int y = 0; y < frontTopTileMap.getHeight(); y++) {
+                int pixel = frontTopTileMap.getRGB(x, y);
+                Color colour = new Color((pixel >> 16) & 0xff, (pixel >> 8) & 0xff, pixel & 0xff);
+                if (!colour.equals(Color.BLACK)) {
+                    Tile tile = tileSheet.getTile(colour.getRed(), colour.getGreen());
+                    tile.addLocation(Layer.FRONT_TOP, new Location(x * 16, y * 16));
+                    getTiles(Layer.FRONT_TOP).add(tile);
+                }
+            }
+        }
     }
 
     public BufferedImage getBackTileMap() {
@@ -178,6 +186,15 @@ public class MapPanel extends JPanel {
         populate();
     }
 
+    public BufferedImage getFrontTopTileMap() {
+        return frontTopTileMap;
+    }
+
+    public void setFrontTopTileMap(BufferedImage frontTopTileMap) {
+        this.frontTopTileMap = frontTopTileMap;
+        populate();
+    }
+
     public TileSheet getTileSheet() {
         return tileSheet;
     }
@@ -199,6 +216,9 @@ public class MapPanel extends JPanel {
         }
         for (Tile tile : getTiles(Layer.FRONT)) {
             tile.render(graphics, Layer.FRONT);
+        }
+        for (Tile tile : getTiles(Layer.FRONT_TOP)) {
+            tile.render(graphics, Layer.FRONT_TOP);
         }
         for (WorldObject object : objects) {
             if (object.getLocation().distanceSquared(camera.getLocation()) <= 640000) {

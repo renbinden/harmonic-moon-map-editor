@@ -85,6 +85,7 @@ public class TileFrame extends JFrame {
                         TileFrame.this.mapFrame.getMapPanel().setBackTopTileMap(ImageIO.read(new File(fileChooser.getSelectedFile(), "tiles-back-top.png")));
                         TileFrame.this.mapFrame.getMapPanel().setObjectMap(ImageIO.read(new File(fileChooser.getSelectedFile(), "objects.png")));
                         TileFrame.this.mapFrame.getMapPanel().setFrontTileMap(ImageIO.read(new File(fileChooser.getSelectedFile(), "tiles-front.png")));
+                        TileFrame.this.mapFrame.getMapPanel().setFrontTopTileMap(ImageIO.read(new File(fileChooser.getSelectedFile(), "tiles-front-top.png")));
                         TileFrame.this.mapFrame.repaint();
                     } catch (IOException exception) {
                         exception.printStackTrace();
@@ -102,10 +103,12 @@ public class TileFrame extends JFrame {
                 int returnVal = fileChooser.showSaveDialog(TileFrame.this);
                 if (returnVal == JFileChooser.APPROVE_OPTION) {
                     try {
+                        if (!fileChooser.getSelectedFile().exists()) fileChooser.getSelectedFile().mkdir();
                         ImageIO.write(TileFrame.this.mapFrame.getMapPanel().getBackTileMap(), "png", new File(fileChooser.getSelectedFile(), "tiles-back.png"));
                         ImageIO.write(TileFrame.this.mapFrame.getMapPanel().getBackTopTileMap(), "png", new File(fileChooser.getSelectedFile(), "tiles-back-top.png"));
                         ImageIO.write(TileFrame.this.mapFrame.getMapPanel().getObjectMap(), "png", new File(fileChooser.getSelectedFile(), "objects.png"));
                         ImageIO.write(TileFrame.this.mapFrame.getMapPanel().getFrontTileMap(), "png", new File(fileChooser.getSelectedFile(), "tiles-front.png"));
+                        ImageIO.write(TileFrame.this.mapFrame.getMapPanel().getFrontTopTileMap(), "png", new File(fileChooser.getSelectedFile(), "tiles-front-top.png"));
                     } catch (IOException exception) {
                         exception.printStackTrace();
                     }

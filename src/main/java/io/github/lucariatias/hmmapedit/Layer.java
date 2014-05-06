@@ -4,6 +4,7 @@ public enum Layer {
 
     BACK,
     BACK_TOP,
-    FRONT
+    FRONT,
+    FRONT_TOP
 
 }
