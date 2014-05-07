@@ -95,7 +95,7 @@ public class MapPanel extends JPanel {
     }
 
     public void populate() {
-        if (backTileMap == null || backTopTileMap == null || objectMap == null || frontTileMap == null || tileSheet == null) return;
+        if (backTileMap == null || backTopTileMap == null || objectMap == null || frontTileMap == null || frontTopTileMap == null || tileSheet == null) return;
         for (int x = 0; x < backTileMap.getWidth(); x++) {
             for (int y = 0; y < backTileMap.getHeight(); y++) {
                 int pixel = backTileMap.getRGB(x, y);
