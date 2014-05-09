@@ -43,10 +43,10 @@ public class MapPanel extends JPanel {
     }
 
     private void handleMouse(MouseEvent event) {
-        /*if (SwingUtilities.isMiddleMouseButton(event)) {
+        if (SwingUtilities.isMiddleMouseButton(event)) {
             MapPanel.this.mapFrame.setScrollingEnabled(!MapPanel.this.mapFrame.isScrollingEnabled());
             return;
-        }*/
+        }
         int mouseWindowX = (int) (event.getXOnScreen() - getLocationOnScreen().getX());
         int mouseWindowY = (int) (event.getYOnScreen() - getLocationOnScreen().getY());
         int mouseMapX = mouseWindowX + camera.getLocation().getX();
