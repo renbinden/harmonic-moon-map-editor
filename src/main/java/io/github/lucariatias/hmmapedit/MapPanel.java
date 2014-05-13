@@ -53,6 +53,10 @@ public class MapPanel extends JPanel {
         int mouseMapY = mouseWindowY + camera.getLocation().getY();
         int mapTileX = mouseMapX / 16;
         int mapTileY = mouseMapY / 16;
+        if (SwingUtilities.isRightMouseButton(event)) {
+            JOptionPane.showMessageDialog(this, "Tile location: " + mapTileX + ", " + mapTileY + "\n" + "World location: " + mouseMapX + ", " + mouseMapY);
+            return;
+        }
         int tileX = 0, tileY = 0;
         for (Tile tile : tileSheet.getTiles()) {
             if (tile.isSelected()) {
