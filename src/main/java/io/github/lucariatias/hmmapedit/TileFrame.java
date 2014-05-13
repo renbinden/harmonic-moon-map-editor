@@ -2,7 +2,6 @@ package io.github.lucariatias.hmmapedit;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
@@ -25,10 +24,10 @@ public class TileFrame extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setupMenuBar();
         comboBoxObject = new JComboBox<>(ObjectType.values());
-        comboBoxObject.setBounds(16, 16, 256, 32);
+        comboBoxObject.setBounds(16, 16, 128, 32);
         add(comboBoxObject);
         comboBoxLayer = new JComboBox<>(Layer.values());
-        comboBoxLayer.setBounds(272, 16, 256, 32);
+        comboBoxLayer.setBounds(144, 16, 128, 32);
         add(comboBoxLayer);
         tilePanel = new TilePanel(this, null);
         tilePanel.setBounds(0, 64, 256, 480);
@@ -47,32 +46,7 @@ public class TileFrame extends JFrame {
         System.setProperty("apple.laf.useScreenMenuBar", "true");
         JMenuBar menuBar = new JMenuBar();
         JMenu fileMenu = new JMenu("File");
-        JMenuItem openTileSheet = new JMenuItem("Open tile sheet");
-        openTileSheet.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent event) {
-                JFileChooser fileChooser = new JFileChooser(System.getProperty("os.name").toLowerCase().contains("mac") ? "/Volumes/Macintosh HD 2/harmonic-moon/harmonic-moon/src/main/resources/" : "/home/ross/Documents/harmonic-moon/harmonic-moon/src/main/resources/");
-                FileNameExtensionFilter filter = new FileNameExtensionFilter("Portable Network Graphics", "png");
-                fileChooser.setFileFilter(filter);
-                int returnVal = fileChooser.showOpenDialog(TileFrame.this);
-                if (returnVal == JFileChooser.APPROVE_OPTION) {
-                    try {
-                        BufferedImage image = ImageIO.read(fileChooser.getSelectedFile());
-                        TileSheet tileSheet = new TileSheet(TileFrame.this.mapFrame.getCamera(), image, 16, 16);
-                        TileFrame.this.mapFrame.getMapPanel().setTileSheet(tileSheet);
-                        TileFrame.this.mapFrame.repaint();
-                        setSize(image.getWidth(), image.getHeight() + 64);
-                        tilePanel.setSize(image.getWidth(), image.getHeight());
-                        tilePanel.setTileSheet(tileSheet);
-                        repaint();
-                    } catch (IOException exception) {
-                        exception.printStackTrace();
-                    }
-                }
-            }
-        });
-        fileMenu.add(openTileSheet);
-        JMenuItem openMap = new JMenuItem("Open map");
+        JMenuItem openMap = new JMenuItem("Open");
         openMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
@@ -87,6 +61,14 @@ public class TileFrame extends JFrame {
                         TileFrame.this.mapFrame.getMapPanel().setFrontTileMap(ImageIO.read(new File(fileChooser.getSelectedFile(), "tiles-front.png")));
                         TileFrame.this.mapFrame.getMapPanel().setFrontTopTileMap(ImageIO.read(new File(fileChooser.getSelectedFile(), "tiles-front-top.png")));
                         TileFrame.this.mapFrame.repaint();
+                        BufferedImage image = ImageIO.read(new File(fileChooser.getSelectedFile(), "tilesheet.png"));
+                        TileSheet tileSheet = new TileSheet(TileFrame.this.mapFrame.getCamera(), image, 16, 16);
+                        TileFrame.this.mapFrame.getMapPanel().setTileSheet(tileSheet);
+                        TileFrame.this.mapFrame.repaint();
+                        setSize(Math.max(image.getWidth(), 480), Math.max(image.getHeight() + 64, 480));
+                        tilePanel.setSize(image.getWidth(), image.getHeight());
+                        tilePanel.setTileSheet(tileSheet);
+                        repaint();
                     } catch (IOException exception) {
                         exception.printStackTrace();
                     }
@@ -94,7 +76,7 @@ public class TileFrame extends JFrame {
             }
         });
         fileMenu.add(openMap);
-        JMenuItem saveMap = new JMenuItem("Save map");
+        JMenuItem saveMap = new JMenuItem("Save");
         saveMap.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent event) {
