@@ -30,17 +30,25 @@ public class MapFrame extends JFrame {
                 if (!(MapFrame.this.isVisible() && MapFrame.this.isActive() && mapPanel.getBackTileMap() != null && mapPanel.getObjectMap() != null && mapPanel.getFrontTileMap() != null && mapPanel.getFrontTopTileMap() != null && mapPanel.getTileSheet() != null && scrollingEnabled)) return;
                 Point mousePoint = MouseInfo.getPointerInfo().getLocation();
                 if (!MapFrame.this.getBounds().contains(mousePoint)) return;
-                if (mousePoint.getX() - MapFrame.this.getLocationOnScreen().getX() > getWidth() - 64) {
-                    camera.setLocation(camera.getLocation().getRelative(16, 0));
+                if (camera.getLocation().getX() < (MapFrame.this.getMapPanel().getBackTileMap().getWidth() * 16) - 640) {
+                    if (mousePoint.getX() - MapFrame.this.getLocationOnScreen().getX() > getWidth() - 64) {
+                        camera.setLocation(camera.getLocation().getRelative(16, 0));
+                    }
                 }
-                if (mousePoint.getX() - MapFrame.this.getLocationOnScreen().getX() < 64) {
-                    camera.setLocation(camera.getLocation().getRelative(-16, 0));
+                if (camera.getLocation().getX() > 0) {
+                    if (mousePoint.getX() - MapFrame.this.getLocationOnScreen().getX() < 64) {
+                        camera.setLocation(camera.getLocation().getRelative(-16, 0));
+                    }
                 }
-                if (mousePoint.getY() - MapFrame.this.getLocationOnScreen().getY() > getHeight() - 64) {
-                    camera.setLocation(camera.getLocation().getRelative(0, 16));
+                if (camera.getLocation().getY() < (MapFrame.this.getMapPanel().getBackTileMap().getHeight() * 16) - 480) {
+                    if (mousePoint.getY() - MapFrame.this.getLocationOnScreen().getY() > getHeight() - 64) {
+                        camera.setLocation(camera.getLocation().getRelative(0, 16));
+                    }
                 }
-                if (mousePoint.getY() - MapFrame.this.getLocationOnScreen().getY() < 64) {
-                    camera.setLocation(camera.getLocation().getRelative(0, -16));
+                if (camera.getLocation().getY() > 0) {
+                    if (mousePoint.getY() - MapFrame.this.getLocationOnScreen().getY() < 64) {
+                        camera.setLocation(camera.getLocation().getRelative(0, -16));
+                    }
                 }
                 MapFrame.this.repaint();
             }
