@@ -14,7 +14,8 @@ public enum ObjectType {
     SYALAE(0, 1, 4),
     ANARIA(0, 1, 5),
     IDAIN(0, 1, 6),
-    SEURI(0, 1, 7);
+    SEURI(0, 1, 7),
+    GUARD_NPC(0, 1, 8);
 
 
     private final int r;
