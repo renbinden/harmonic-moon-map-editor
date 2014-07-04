@@ -69,6 +69,7 @@ public class World {
     }
 
     public WorldObject getObjectAt(int x, int y) {
+        if (x < 0 || x >= getObjects().length || y < 0 || y >= getObjects()[x].length) return null;
         return getObjects()[x][y];
     }
 
