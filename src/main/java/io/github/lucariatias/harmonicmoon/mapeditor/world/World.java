@@ -6,7 +6,7 @@ import io.github.lucariatias.harmonicmoon.mapeditor.metadata.WorldMetadata;
 import io.github.lucariatias.harmonicmoon.mapeditor.tile.Layer;
 import io.github.lucariatias.harmonicmoon.mapeditor.tile.PlacedTile;
 import io.github.lucariatias.harmonicmoon.mapeditor.tile.TileSheet;
-import io.github.lucariatias.harmonicmoon.mapeditor.tile.TileSheetMetadata;
+import io.github.lucariatias.harmonicmoon.mapeditor.metadata.TileSheetMetadata;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

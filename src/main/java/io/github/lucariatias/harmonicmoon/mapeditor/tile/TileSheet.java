@@ -1,5 +1,7 @@
 package io.github.lucariatias.harmonicmoon.mapeditor.tile;
 
+import io.github.lucariatias.harmonicmoon.mapeditor.metadata.TileSheetMetadata;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;

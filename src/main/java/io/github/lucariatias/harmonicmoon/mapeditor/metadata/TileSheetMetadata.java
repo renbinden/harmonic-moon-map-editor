@@ -1,4 +1,4 @@
-package io.github.lucariatias.harmonicmoon.mapeditor.tile;
+package io.github.lucariatias.harmonicmoon.mapeditor.metadata;
 
 import io.github.lucariatias.harmonicmoon.mapeditor.metadata.Metadata;
 
