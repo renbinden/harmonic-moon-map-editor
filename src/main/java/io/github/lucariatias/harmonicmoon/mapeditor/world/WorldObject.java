@@ -2,7 +2,7 @@ package io.github.lucariatias.harmonicmoon.mapeditor.world;
 
 import io.github.lucariatias.harmonicmoon.mapeditor.metadata.DoorMetadata;
 import io.github.lucariatias.harmonicmoon.mapeditor.metadata.Metadata;
-import io.github.lucariatias.harmonicmoon.mapeditor.metadata.NpcMetadata;
+import io.github.lucariatias.harmonicmoon.mapeditor.metadata.NPCMetadata;
 import io.github.lucariatias.harmonicmoon.mapeditor.metadata.WorldObjectMetadata;
 
 import java.awt.*;
@@ -25,7 +25,7 @@ public class WorldObject {
         IDAIN(0, 1, 6),
         SEURI(0, 1, 7),
 
-        NPC_GUARD(0, 1, 8, NpcMetadata.class);
+        NPC_SOLDIER(0, 1, 8, NPCMetadata.class);
 
         private Class<? extends Metadata> metadataClass;
         private Color colour;

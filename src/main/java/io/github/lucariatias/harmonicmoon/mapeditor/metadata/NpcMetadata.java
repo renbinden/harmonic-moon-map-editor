@@ -1,13 +1,13 @@
 package io.github.lucariatias.harmonicmoon.mapeditor.metadata;
 
-public class NpcMetadata extends WorldObjectMetadata {
+public class NPCMetadata extends WorldObjectMetadata {
 
     private String[] chatLines;
 
-    public NpcMetadata(NpcMetadata original) {
+    public NPCMetadata(NPCMetadata original) {
         this.chatLines = original.chatLines;
     }
 
-    public NpcMetadata() {}
+    public NPCMetadata() {}
 
 }
