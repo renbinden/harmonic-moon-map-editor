@@ -80,17 +80,18 @@ public class MetadataModifyPanel extends JPanel {
             spinner.addChangeListener(event -> field.set(spinner.getValue()));
             add(spinner);
         } else if (field.getField().getType() == String.class) {
-            JTextField textField = new JTextField(field.get() != null ? (String) field.get() : "");
-            textField.setBounds(4, 32, 112, 24);
-            textField.getDocument().addDocumentListener(new DocumentListener() {
+            JTextArea textArea = new JTextArea(field.get() != null ? (String) field.get() : "");
+            JScrollPane scrollPane = new JScrollPane(textArea);
+            scrollPane.setBounds(4, 32, 232, 128);
+            textArea.getDocument().addDocumentListener(new DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent event) {
-                    field.set(textField.getText());
+                    field.set(textArea.getText());
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent event) {
-                    field.set(textField.getText());
+                    field.set(textArea.getText());
                 }
 
                 @Override
@@ -98,7 +99,7 @@ public class MetadataModifyPanel extends JPanel {
 
                 }
             });
-            add(textField);
+            add(scrollPane);
         } else if (field.getField().getType() == String[].class) {
             StringBuilder builder = new StringBuilder();
             for (String string : field.get() != null ? (String[]) field.get() : new String[] {}) {

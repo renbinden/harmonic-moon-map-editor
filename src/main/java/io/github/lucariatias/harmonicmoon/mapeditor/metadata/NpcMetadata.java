@@ -2,10 +2,12 @@ package io.github.lucariatias.harmonicmoon.mapeditor.metadata;
 
 public class NPCMetadata extends WorldObjectMetadata {
 
-    private String[] chatLines;
+    private String initialiseScript;
+    private String interactScript;
 
     public NPCMetadata(NPCMetadata original) {
-        this.chatLines = original.chatLines;
+        this.initialiseScript = original.initialiseScript;
+        this.interactScript = original.interactScript;
     }
 
     public NPCMetadata() {}
