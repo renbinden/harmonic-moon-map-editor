@@ -30,7 +30,12 @@ public class Tile {
     }
 
     public PlacedTile place(World world, Layer layer, int x, int y) {
-        PlacedTile tile = new PlacedTile(tileSheet, column, row, x, y);
+        PlacedTile tile;
+        if (layer == Layer.BACK || column != 0 || row != 0) {
+            tile = new PlacedTile(tileSheet, column, row, x, y);
+        } else {
+            tile = null;
+        }
         world.getTiles(layer)[x][y] = tile;
         return tile;
     }
