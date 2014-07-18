@@ -25,7 +25,8 @@ public class WorldObject {
         IDAIN(0, 1, 6),
         SEURI(0, 1, 7),
 
-        NPC_SOLDIER(0, 1, 8, NPCMetadata.class);
+        NPC_SOLDIER(0, 1, 8, NPCMetadata.class),
+        NPC_AVIRNYR_ITEM_MERCHANT(0, 1, 9, NPCMetadata.class);
 
         private Class<? extends Metadata> metadataClass;
         private Color colour;
